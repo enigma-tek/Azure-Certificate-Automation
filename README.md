@@ -1,2 +1,2 @@
 # AzureCertificateManager
-Azure Certificate Manager (or ACM) is a certificate manager designed to work with ManageEngines Key Manager Plus software. Its design is to help you organize and update certificates in Azure.
+Azure Certificate Manager (or ACM) is a certificate manager designed to work with ManageEngines Key Manager Plus (KMP) software. Its design is to help you organize and update certificates in Azure. Key Functions - 1. Update and email out Self Signed Certificates (if used) 2. Delete old or expired certificates after a set amount of time, Scan Azure and compare certificates in KMP VS. whats in Azure. Update certificates across Azure using KMP as the source of truth.
