@@ -68,6 +68,10 @@ function softInstallS1 {
             New-Item -Path "C:\Program Files\ACM\" -Name "Config" -ItemType "directory"
             New-Item -Path "C:\Program Files\ACM\" -Name "Creds" -ItemType "directory"
             New-Item -Path "C:\Program Files\ACM\" -Name "Software" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\" -Name "Temp" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\" -Name "Old_User_Certs" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Logs\" -Name "Updater" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Logs\" -Name "Orchestrator" -ItemType "directory"
             
         $outputText = $outputText + "`nCreating Enc Key..."
         $State.Output = $outputText
