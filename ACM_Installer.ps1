@@ -21,25 +21,25 @@ $Xaml = @"
  <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="787" Margin="6,8,0,0" Background="#6c60a5">
 <TextBlock TextWrapping="Wrap" Text="Fill in the Storage account Name and Key. Fill in the Email account information (uses only 365 accounts with App Password). Installer will create local file and the storage account file structure. All Files containing sensitive information will be encrypted locally using a randomized key created during the install process." Margin="8,3,10,1" Foreground="#ffffff" FontSize="12"/>
 </Border>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="96" Width="769" TextWrapping="Wrap" Margin="7,258,0,0" BorderBrush="#000000" Background="#eeecf3" Text="{Binding Output}" Name="lo64cwmsdcbuf"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="96" Width="769" TextWrapping="Wrap" Margin="7,258,0,0" BorderBrush="#000000" Background="#eeecf3" Text="{Binding Output}" Name="lq5lcxxd8j5tw"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Output" Margin="8,241,0,0"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Storage Account Name" Margin="10,67,0,0"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Storage Account Key" Margin="11,120,0,0"/>
 
 
 <Button Content="Install" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="641,157,0,0" Foreground="#194d4a" BorderBrush="#194d4a" Height="30" FontSize="15" FontWeight="DemiBold" Background="#ffffff" Name="Install_Button"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="321" TextWrapping="Wrap" Margin="10,84,0,0" Text="{Binding Storage_ACCT_Name}" Padding="4,8,0,0" Name="lo64cwmsu38x4"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="321" TextWrapping="Wrap" Margin="10,84,0,0" Text="{Binding Storage_ACCT_Name}" Padding="4,8,0,0" Name="lq5lcxxeubr2v"/>
 
 
 
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Once the fields are filled in, click Install" Margin="583,109,0,0"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Storage Account File Share Name" Margin="11,178,0,0"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="324" TextWrapping="Wrap" Margin="10.84375,196.984375,0,0" Text="{Binding Storage_ACCT_FS}" Padding="4,8,0,0" Name="lo64cwmt9j7ie"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="324" TextWrapping="Wrap" Margin="10.84375,196.984375,0,0" Text="{Binding Storage_ACCT_FS}" Padding="4,8,0,0" Name="lq5lcxxexg4bx"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="156" Width="2" Margin="563.844,76.9844,0,0"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="2" Width="227" Margin="564.844,230.984,0,0"/>
 
 
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" Width="549" TextWrapping="Wrap" Margin="11,138,0,0" Name="lo64cwmttvvb8" Text="{Binding Storage_ACCT_Key}" Padding="4,8,0,0"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" Width="549" TextWrapping="Wrap" Margin="11,138,0,0" Text="{Binding Storage_ACCT_Key}" Padding="4,8,0,0" Name="lq5lcxxeu96dq"/>
 </Grid></Window>
 "@
 
@@ -65,19 +65,29 @@ function softInstallS1 {
         $State.Output = $outputText
             New-Item -Path "C:\Program Files\" -Name "ACM" -ItemType "directory"
             New-Item -Path "C:\Program Files\ACM\" -Name "Logs" -ItemType "directory"
-            New-Item -Path "C:\Program Files\ACM\" -Name "Config" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Logs" -Name "Updater" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Logs" -Name "Orchestrator" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Logs" -Name "Configurator" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Logs" -Name "Search" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Logs" -Name "Installer" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\" -Name "Configs" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Configs" -Name "Versions" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Configs" -Name "Orchestrator" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Configs" -Name "Configurator" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Configs" -Name "Key" -ItemType "directory"
             New-Item -Path "C:\Program Files\ACM\" -Name "Creds" -ItemType "directory"
             New-Item -Path "C:\Program Files\ACM\" -Name "Software" -ItemType "directory"
             New-Item -Path "C:\Program Files\ACM\" -Name "Temp" -ItemType "directory"
-            New-Item -Path "C:\Program Files\ACM\" -Name "Old_User_Certs" -ItemType "directory"
-            New-Item -Path "C:\Program Files\ACM\Logs\" -Name "Updater" -ItemType "directory"
-            New-Item -Path "C:\Program Files\ACM\Logs\" -Name "Orchestrator" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\" -Name "Removed" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Removed" -Name "Employee" -ItemType "directory"
+            New-Item -Path "C:\Program Files\ACM\Removed" -Name "Expired" -ItemType "directory"
+            
             
         $outputText = $outputText + "`nCreating Enc Key..."
         $State.Output = $outputText
             $EncryptionKeyBytes = New-Object Byte[] 32
             [Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($EncryptionKeyBytes)
-            $EncryptionKeyBytes | Out-File "C:\Program Files\ACM\Config\ACM_Enc.key"
+            $EncryptionKeyBytes | Out-File "C:\Program Files\ACM\Configs\Key\ACM_Enc.key"
         softInstallS2
 }
 
@@ -98,11 +108,8 @@ function softInstallS2 {
             $State.Output = $outputText
             $DriveGT = $DriveLtr + ':'
             cd $DriveGT
-            New-Item -Name "Delete" -ItemType "directory"
-            New-Item -Name "Employee" -ItemType "directory"
-            New-Item -Name "Logs" -ItemType "directory"
-            New-Item -Name "Search" -ItemType "directory"
-            New-Item -Name "Update" -ItemType "directory"
+            New-Item -Name "CertificateAutomationFiles" -ItemType "directory"
+          
             $outputText = $outputText + "`nDirectories Created..."
             $State.Output = $outputText
             $outputText = $outputText + "`nCreating local Enc file from storage information..."
@@ -116,19 +123,19 @@ function softInstallS2 {
 
 #Software Install Step3 - Write the Storage account information to the local server using the enc key
 function softInstallS3 {
-        $ACMKeyData = Get-Content "C:\Program Files\ACM\Config\ACM_Enc.key"
+        $ACMKeyData = Get-Content "C:\Program Files\ACM\Configs\Key\ACM_Enc.key"
         $StorageName = $State.Storage_ACCT_Name | ConvertTo-SecureString -AsPlainText -Force
         $StorageName | ConvertFrom-SecureString -Key $ACMKeyData | Out-File "C:\Program Files\ACM\Creds\StorageName.txt"
         $outputText = $outputText + "`nStorage Name Encrypted file created and set..."
         $State.Output = $outputText
         
-        $ACMKeyData = Get-Content "C:\Program Files\ACM\Config\ACM_Enc.key"
+        $ACMKeyData = Get-Content "C:\Program Files\ACM\Configs\Key\ACM_Enc.key"
         $StorageKey = $State.Storage_ACCT_Key | ConvertTo-SecureString -AsPlainText -Force
         $StorageKey | ConvertFrom-SecureString -Key $ACMKeyData | Out-File "C:\Program Files\ACM\Creds\StorageKey.txt"
         $outputText = $outputText + "`nStorage Key Encrypted file created and set..."
         $State.Output = $outputText
         
-        $ACMKeyData = Get-Content "C:\Program Files\ACM\Config\ACM_Enc.key"
+        $ACMKeyData = Get-Content "C:\Program Files\ACM\Configs\Key\ACM_Enc.key"
         $StorageFSN = $State.Storage_ACCT_FS | ConvertTo-SecureString -AsPlainText -Force
         $StorageFSN | ConvertFrom-SecureString -Key $ACMKeyData | Out-File "C:\Program Files\ACM\Creds\StorageFSN.txt"
         $outputText = $outputText + "`nStorage File Share Name Encrypted file created and set..."
@@ -141,13 +148,11 @@ function softInstallS4 {
     
         $outputText = $outputText + "`nDownloading Software..."
         $State.Output = $outputText
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Cert_Updates.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Cert_Updates.ps1"
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Delete_Old.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Delete_Old.ps1"
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Search.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Search.ps1"
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Self_Signed.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Self_Signed.ps1"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Orchestrator" -OutFile "C:\Program Files\ACM\Software\ACM_Orchestrator.ps1"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Configurator.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Configurator.ps1"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Updater.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Updater.ps1"
-        $outputText = $outputText + "`nSoftware Downloaded..."
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/versions.json" -OutFile "C:\Program Files\ACM\Configs\Versions\Versions.json"
+        $outputText = $outputText + "`nSoftware and Versions file downloaded..."
         $State.Output = $outputText
         softInstallS5
 }
@@ -179,8 +184,8 @@ function softInstallS6 {
         $installTimeStop = Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss"
         $UserName = $env:UserName
         $ComputerName = $env:computername
-            $InstallLogFile = "C:\Program Files\ACM\Logs\install.log"
-            $InstallLogOutput = "","","Install Date and Time",$installTimeStart,"","Install Stop Time",$installTimeStop,"","Computer Name:",$ComputerName,"","Installed By:",$UserName,"","Folder_Creation_Errors",$folderCreateErrors,"" #,"Download_File_Errors",$downloadFilesErrors,"","Create_Shortcut_Errors",$shortcutsCreated,
+            $InstallLogFile = "C:\Program Files\ACM\Logs\Installer\Install.log"
+            $InstallLogOutput = "","","Install Date and Time",$installTimeStart,"","Install Stop Time",$installTimeStop,"","Computer Name:",$ComputerName,"","Installed By:",$UserName,"","Folder_Creation_Errors",$folderCreateErrors,""
             $InstallLogOutput  | Out-File -FilePath $InstallLogFile -append
          $outputText = $outputText + "Install Log written..."
         $State.Output = $outputText
@@ -262,10 +267,10 @@ $DataContext = New-Object System.Collections.ObjectModel.ObservableCollection[Ob
 FillDataContext @("Output","Storage_ACCT_Name","Storage_ACCT_Key","Storage_ACCT_FS") 
 
 $Window.DataContext = $DataContext
-Set-Binding -Target $lo64cwmsdcbuf -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 0 -Name "Output"  
-Set-Binding -Target $lo64cwmsu38x4 -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 1 -Name "Storage_ACCT_Name"  
-Set-Binding -Target $lo64cwmt9j7ie -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 3 -Name "Storage_ACCT_FS"  
-Set-Binding -Target $lo64cwmttvvb8 -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 2 -Name "Storage_ACCT_Key"  
+Set-Binding -Target $lq5lcxxd8j5tw -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 0 -Name "Output"  
+Set-Binding -Target $lq5lcxxeubr2v -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 1 -Name "Storage_ACCT_Name"  
+Set-Binding -Target $lq5lcxxexg4bx -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 3 -Name "Storage_ACCT_FS"  
+Set-Binding -Target $lq5lcxxeu96dq -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 2 -Name "Storage_ACCT_Key"  
 
 
 
@@ -334,3 +339,5 @@ Start-RunspaceTask $JobCleanupScript @([PSObject]@{ Name='Jobs' ; Variable=$Jobs
 
 
 $Window.ShowDialog()
+
+
