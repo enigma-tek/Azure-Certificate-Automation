@@ -19,27 +19,20 @@ $Xaml = @"
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="800" Title="(ACM) Azure Certificate Manager / Key Manager Plus Edition - Installer" Height="400" Name="Window_Main" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 <Grid>
  <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="787" Margin="6,8,0,0" Background="#6c60a5">
-<TextBlock TextWrapping="Wrap" Text="Fill in the Storage account Name and Key. Fill in the Email account information (uses only 365 accounts with App Password). Installer will create local file and the storage account file structure. All Files containing sensitive information will be encrypted locally using a randomized key created during the install process." Margin="8,3,10,1" Foreground="#ffffff" FontSize="12"/>
+<TextBlock TextWrapping="Wrap" Text="Fill in the Storage account Name and Key. Installer will create local file and the storage account file structure. All Files containing sensitive information will be encrypted locally using a randomized key created during the install process." Margin="8,3,10,1" Foreground="#ffffff" FontSize="12"/>
 </Border>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="96" Width="769" TextWrapping="Wrap" Margin="7,258,0,0" BorderBrush="#000000" Background="#eeecf3" Text="{Binding Output}" Name="lq5lcxxd8j5tw"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="96" Width="769" TextWrapping="Wrap" Margin="7,258,0,0" BorderBrush="#000000" Background="#eeecf3" Text="{Binding Output}" Name="lqcdhgm7lndyd"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Output" Margin="8,241,0,0"/>
-<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Storage Account Name" Margin="10,67,0,0"/>
-<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Storage Account Key" Margin="11,120,0,0"/>
-
-
-<Button Content="Install" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="641,157,0,0" Foreground="#194d4a" BorderBrush="#194d4a" Height="30" FontSize="15" FontWeight="DemiBold" Background="#ffffff" Name="Install_Button"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="321" TextWrapping="Wrap" Margin="10,84,0,0" Text="{Binding Storage_ACCT_Name}" Padding="4,8,0,0" Name="lq5lcxxeubr2v"/>
-
-
-
-<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Once the fields are filled in, click Install" Margin="583,109,0,0"/>
+<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Storage Account Name" Margin="12,126,0,0"/>
+<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Storage Account Key" Margin="12,71,0,0"/>
+<Button Content="Install" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="640,199,0,0" Foreground="#194d4a" BorderBrush="#194d4a" Height="30" FontSize="15" FontWeight="DemiBold" Background="#ffffff" Name="Install_Button"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="321" TextWrapping="Wrap" Margin="12,145,0,0" Text="{Binding Storage_ACCT_Name}" Padding="4,8,0,0" Name="lqcdhgm80f6kb"/>
+<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Once the fields are filled in, click Install" Margin="580,163,0,0"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Storage Account File Share Name" Margin="11,178,0,0"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="324" TextWrapping="Wrap" Margin="10.84375,196.984375,0,0" Text="{Binding Storage_ACCT_FS}" Padding="4,8,0,0" Name="lq5lcxxexg4bx"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="156" Width="2" Margin="563.844,76.9844,0,0"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="2" Width="227" Margin="564.844,230.984,0,0"/>
-
-
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" Width="549" TextWrapping="Wrap" Margin="11,138,0,0" Text="{Binding Storage_ACCT_Key}" Padding="4,8,0,0" Name="lq5lcxxeu96dq"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="324" TextWrapping="Wrap" Margin="10.84375,196.984375,0,0" Text="{Binding Storage_ACCT_FS}" Padding="4,8,0,0" Name="lqcdhgm8x68il"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="79" Width="2" Margin="563.844,153.9844,0,0"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="2" Width="227" Margin="565.844,247.984,0,0"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="777" TextWrapping="Wrap" Margin="11,90,0,0" Text="{Binding Storage_ACCT_Key}" Padding="4,8,0,0" Name="lqcdhgm8l5mzj"/>
 </Grid></Window>
 "@
 
@@ -148,7 +141,7 @@ function softInstallS4 {
     
         $outputText = $outputText + "`nDownloading Software..."
         $State.Output = $outputText
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Orchestrator" -OutFile "C:\Program Files\ACM\Software\ACM_Orchestrator.ps1"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Configurator.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Orchestrator.ps1"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Configurator.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Configurator.ps1"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Updater.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Updater.ps1"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/versions.json" -OutFile "C:\Program Files\ACM\Configs\Versions\Versions.json"
@@ -267,10 +260,10 @@ $DataContext = New-Object System.Collections.ObjectModel.ObservableCollection[Ob
 FillDataContext @("Output","Storage_ACCT_Name","Storage_ACCT_Key","Storage_ACCT_FS") 
 
 $Window.DataContext = $DataContext
-Set-Binding -Target $lq5lcxxd8j5tw -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 0 -Name "Output"  
-Set-Binding -Target $lq5lcxxeubr2v -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 1 -Name "Storage_ACCT_Name"  
-Set-Binding -Target $lq5lcxxexg4bx -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 3 -Name "Storage_ACCT_FS"  
-Set-Binding -Target $lq5lcxxeu96dq -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 2 -Name "Storage_ACCT_Key"  
+Set-Binding -Target $lqcdhgm7lndyd -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 0 -Name "Output"  
+Set-Binding -Target $lqcdhgm80f6kb -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 1 -Name "Storage_ACCT_Name"  
+Set-Binding -Target $lqcdhgm8x68il -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 3 -Name "Storage_ACCT_FS"  
+Set-Binding -Target $lqcdhgm8l5mzj -Property $([System.Windows.Controls.TextBox]::TextProperty) -Index 2 -Name "Storage_ACCT_Key"  
 
 
 
