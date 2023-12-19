@@ -141,7 +141,7 @@ function softInstallS4 {
     
         $outputText = $outputText + "`nDownloading Software..."
         $State.Output = $outputText
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Configurator.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Orchestrator.ps1"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Orchestrator.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Orchestrator.ps1"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Configurator.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Configurator.ps1"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/ACM_Updater.ps1" -OutFile "C:\Program Files\ACM\Software\ACM_Updater.ps1"
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/enigma-tek/AzureCertificateManager_Pub/main/ACM_Files/versions.json" -OutFile "C:\Program Files\ACM\Configs\Versions\Versions.json"
